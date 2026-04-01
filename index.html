@@ -11900,7 +11900,7 @@ slider-component{--desktop-margin-left-first-item: max( 5rem, calc((100vw - var(
 <div class="th-offer-section" id="th-offers">
   <div class="th-offer-title">Try 60 Days Risk-Free</div>
 
-  <div class="th-offer-card" data-offer="1" data-variant="VARIANT_1">
+  <div class="th-offer-card" data-offer="1" data-variant="53477837209968">
     <div class="th-offer-card-header">
       <div class="th-offer-card-left">
         <div class="th-offer-radio"></div>
@@ -11913,7 +11913,7 @@ slider-component{--desktop-margin-left-first-item: max( 5rem, calc((100vw - var(
     </div>
   </div>
 
-  <div class="th-offer-card" data-offer="2" data-variant="VARIANT_2">
+  <div class="th-offer-card" data-offer="2" data-variant="53477837242736">
     <div class="th-offer-card-header">
       <div class="th-offer-card-left">
         <div class="th-offer-radio"></div>
@@ -11927,7 +11927,7 @@ slider-component{--desktop-margin-left-first-item: max( 5rem, calc((100vw - var(
     </div>
   </div>
 
-  <div class="th-offer-card" data-offer="3" data-variant="VARIANT_3">
+  <div class="th-offer-card" data-offer="3" data-variant="53477837275504">
     <div class="th-offer-badge">Most Popular</div>
     <div class="th-offer-card-header">
       <div class="th-offer-card-left">
@@ -11945,7 +11945,7 @@ slider-component{--desktop-margin-left-first-item: max( 5rem, calc((100vw - var(
     </div>
   </div>
 
-  <div class="th-offer-card selected" data-offer="4" data-variant="VARIANT_4">
+  <div class="th-offer-card selected" data-offer="4" data-variant="53477837308272">
     <div class="th-offer-badge">Best Value</div>
     <div class="th-offer-card-header">
       <div class="th-offer-card-left">
@@ -11992,7 +11992,7 @@ document.getElementById('th-add-to-cart').addEventListener('click', function() {
   var selected = document.querySelector('.th-offer-card.selected');
   if (!selected) { alert('Please select an offer.'); return; }
   var variantId = selected.getAttribute('data-variant');
-  if (variantId && variantId !== 'VARIANT_1' && variantId !== 'VARIANT_2' && variantId !== 'VARIANT_3' && variantId !== 'VARIANT_4') {
+  if (variantId && variantId !== '53477837209968' && variantId !== '53477837242736' && variantId !== '53477837275504' && variantId !== '53477837308272') {
     window.parent.postMessage({ type: 'addToCart', variantId: variantId }, '*');
   } else {
     alert('Checkout coming soon!');
