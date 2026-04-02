@@ -12003,9 +12003,9 @@ document.querySelectorAll('.th-offer-card').forEach(function(card) {
 document.getElementById('th-add-to-cart').addEventListener('click', function() {
   var selected = document.querySelector('.th-offer-card.selected');
   if (!selected) { alert('Please select an offer.'); return; }
-  var variantId = selected.getAttribute('data-variant');
-  if (variantId) {
-    window.parent.postMessage({ type: 'addToCart', variantId: variantId }, '*');
+  var offer = selected.getAttribute('data-offer');
+  if (offer) {
+    window.parent.postMessage({ type: 'addToCart', offer: offer }, '*');
   } else {
     alert('Please select an offer.');
   }
