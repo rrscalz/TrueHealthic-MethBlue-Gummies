@@ -13607,5 +13607,102 @@ body {
 <script defer="defer" src="assets/js/js_18caef3e789e.js" type="text/javascript"></script>
 
 
-</div></body>
+</div>
+<!-- CAROUSEL FIX -->
+<script>
+(function() {
+  // Find the testimonial carousel - 8 cards in a flex row with class r-6obvqq
+  // The parent is the flex container we need to scroll
+  var cards = document.querySelectorAll('.r-6obvqq');
+  if (cards.length < 2) return;
+  
+  // Find the common parent (the flex container)
+  var track = cards[0].parentElement;
+  var trackParent = track.parentElement;
+  
+  // Find the visible viewport container - walk up until we find one that's narrower than the track
+  var viewport = track;
+  while (viewport && viewport.offsetWidth >= track.scrollWidth) {
+    viewport = viewport.parentElement;
+  }
+  if (!viewport) viewport = trackParent;
+  
+  // Set up the viewport for carousel behavior
+  // Find the grandparent that clips
+  var clipContainer = track.parentElement;
+  while (clipContainer && clipContainer.offsetWidth > 700) {
+    clipContainer = clipContainer.parentElement;
+  }
+  if (!clipContainer || clipContainer === document.body) {
+    // Use the first ancestor with a reasonable width
+    clipContainer = track.parentElement;
+  }
+  
+  // Make the track parent clip overflow
+  var carouselViewport = track.parentElement;
+  carouselViewport.style.overflow = 'hidden';
+  
+  // Also clip the outer section containers
+  var clipEl = carouselViewport;
+  for (var ci = 0; ci < 6; ci++) {
+    clipEl = clipEl.parentElement;
+    if (clipEl && clipEl.offsetWidth < 700) {
+      clipEl.style.overflow = 'hidden';
+    }
+  }
+  
+  // Set up smooth scrolling on the track
+  track.style.transition = 'transform 0.4s ease';
+  
+  var currentIndex = 0;
+  var cardWidth = cards[0].offsetWidth;
+  var gap = 24; // gap between cards
+  var totalCards = cards.length;
+  
+  // Calculate how many cards visible at once
+  var viewportWidth = carouselViewport.offsetWidth;
+  var visibleCards = Math.max(1, Math.floor(viewportWidth / (cardWidth + gap)));
+  var maxIndex = Math.max(0, totalCards - visibleCards);
+  
+  function slide(idx) {
+    currentIndex = Math.max(0, Math.min(idx, maxIndex));
+    var offset = -currentIndex * (cardWidth + gap);
+    track.style.transform = 'translateX(' + offset + 'px)';
+  }
+  
+  slide(0);
+  
+  // Attach to arrow buttons
+  var prevBtn = document.querySelector('[data-rid="0ba423ee-9cf0-4276-83b7-313044c132cd"]');
+  var nextBtn = document.querySelector('[data-rid="2b17082b-3db7-494e-a9a2-160c59c4b190"]');
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      slide(currentIndex - 1);
+    });
+    prevBtn.style.cursor = 'pointer';
+  }
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      slide(currentIndex + 1);
+    });
+    nextBtn.style.cursor = 'pointer';
+  }
+  
+  // Recalculate on resize
+  window.addEventListener('resize', function() {
+    cardWidth = cards[0].offsetWidth;
+    viewportWidth = carouselViewport.offsetWidth;
+    visibleCards = Math.max(1, Math.floor(viewportWidth / (cardWidth + gap)));
+    maxIndex = Math.max(0, totalCards - visibleCards);
+    slide(currentIndex);
+  });
+})();
+</script>
+</body>
 </html>
